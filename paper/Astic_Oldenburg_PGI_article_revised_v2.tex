@@ -131,11 +131,13 @@ where the matrix $W_s$ expresses a certain level of confidence in the reference 
 
 The same objective function as in equation \ref{tikhonov} can equivalently be expressed in a Bayesian formulation as a posterior probability density distribution $\mathcal{P}(\mathbf{m}|\mathbf{d_{obs}})$ \citep{doi:10.1137/1.9780898717921}. A posterior distribution, such as defined by the Bayes rule, is proportional to a likelihood distribution $\mathcal{P}(\mathbf{d_{obs}}|\mathbf{m})$, representing the data misfit, times a prior distribution $\mathcal{P}(\mathbf{m})$ (equation \ref{posterior}), normalized by the multiplicative constant $1/\mathcal{P}(\mathbf{d}_{\text{obs}})$:
 
-\begin{align}
-&\mathcal{P}(\mathbf{m}|\mathbf{d}_{\text{obs}}) = \frac{\mathcal{P}(\mathbf{d}_{\text{obs}}|\mathbf{m})\mathcal{P}(\mathbf{m})}{\mathcal{P}(\mathbf{d}_{\text{obs}})} \propto \mathcal{P}(\mathbf{d}_{\text{obs}}|\mathbf{m})\mathcal{P}(\mathbf{m}) \label{posterior}\\
-&\text{ with:} \nonumber \\
-&\mathcal{P}(\mathbf{m}) = \mathcal{P}_{s}(\mathbf{m})\mathcal{P}_{\{x,y,z\}}(\mathbf{m} \label{prior_bayes})
-\end{align}
+\begin{equation}
+&\mathcal{P}(\mathbf{m}|\mathbf{d}_{\text{obs}}) = \frac{\mathcal{P}(\mathbf{d}_{\text{obs}}|\mathbf{m})\mathcal{P}(\mathbf{m})}{\mathcal{P}(\mathbf{d}_{\text{obs}})} \propto \mathcal{P}(\mathbf{d}_{\text{obs}}|\mathbf{m})\mathcal{P}(\mathbf{m}) \label{posterior}
+\end{equation}
+with
+\begin{equation}
+\mathcal{P}(\mathbf{m}) = \mathcal{P}_{s}(\mathbf{m})\mathcal{P}_{\{x,y,z\}}(\mathbf{m} \label{prior_bayes})
+\end{equation}
 
 The prior distribution represents the knowledge on the geophysical model such as a reference model, a certain level of smoothness etc. (equation \ref{prior_bayes}). The model $\mathbf{m}$ that maximizes this posterior distribution (equation \ref{posterior}) is called a MAP (Maximum A Posteriori) estimate; it is the same model that minimizes the objective function. In contrast, a model that only maximizes a likelihood distribution, a data misfit term with no prior, is usually referred to as a Maximum Likelihood Estimate (MLE).
 
@@ -149,11 +151,13 @@ From equation \ref{GaussianDef}, we can see that choosing Gaussian distributions
 
 In this context, the prior distribution and the regularization are equivalent. The prior distribution $\mathcal{P}_{s}$ is equivalent to the smallness term defined in \ref{smallness_l2}. It can be expressed as a multivariate Gaussian distribution. Its mean is the reference model $\mathbf{m}_{\text{ref}}$ and its covariance is the weighting matrix $(W_s^TW_s)^{-1}$. The factor $\beta \alpha_s$ expresses our confidence in this prior (equation \ref{gaussian_prior}). Increasing this confidence parameter $\beta\alpha_s$ is equivalent to reducing the variance around the reference model and thus the recovered solution becomes closer to the reference (such as illustrated in Fig. \ref{fig:ConfidenceLevel}).
 
-\begin{align}
-&\mathcal{P}_{s}(\mathbf{m}) = \mathcal{N}(\mathbf{m}|\mathbf{m}_{\text{ref}}, (\beta\alpha_sW_s^TW_s)^{-1}) \label{gaussian_prior} \\
-&\text{ or equivalently: } \nonumber\\
+\begin{equation}
+&\mathcal{P}_{s}(\mathbf{m}) = \mathcal{N}(\mathbf{m}|\mathbf{m}_{\text{ref}}, (\beta\alpha_sW_s^TW_s)^{-1}) \label{gaussian_prior}
+\end{equation}
+or equivalently:
+\begin{equation}
 &\mathcal{P}_{s}(\mathbf{m}) \propto \mathcal{N}(\mathbf{m}|\mathbf{m}_{\text{ref}}, (W_s^TW_s)^{-1})^{\beta\alpha_s} \label{gaussian_prior_2}
-\end{align}
+\end{equation}
 
 \begin{figure}
 \centering
@@ -216,12 +220,16 @@ The variable $\Theta$ holds the GMM global variables $\Theta= \left\{\pi_j, {\mu
 
 We denote $\mathbf{z}$ as our categorical variable for the labels, i.e. our geological classification. We call this variable our membership. Given an unlabeled data point ${s}_0$, its membership $z_0$ takes the value of the geological unit with the highest probability (see equation \ref{MAP_z_physProp}).
 
-\begin{align}
-&z_0 = \mathop{\hbox{argmax}}\limits_{z \in \left\{1..j\right\}}\mathcal{P}(s_0|z)\mathcal{P}(z) \label{MAP_z_physProp}\\
-&\text{with:} \nonumber \\
-&\mathcal{P}(z) = \pi_z \text{ and}\label{weight_z_prior} \\
+\begin{equation}
+&z_0 = \mathop{\hbox{argmax}}\limits_{z \in \left\{1..j\right\}}\mathcal{P}(s_0|z)\mathcal{P}(z) \label{MAP_z_physProp}
+\end{equation}
+with:
+\begin{equation}
+&\mathcal{P}(z) = \pi_z \text{ and}\label{weight_z_prior}
+\end{equation}
+\begin{equation}
 &\mathcal{P}(s_0|z)=\mathcal{N}({s}_0| {\mu}_{z},\sigma_{z}^2)
-\end{align}
+\end{equation}
 
 Note that equation \ref{MAP_z_physProp} defines a MAP estimate of the geological identifier $\mathbf{z}$. The parameters $\left\{\pi_j\right\}_{j=1..c}$ represent our prior expectation of observing a certain unit before observing ${s}_0$ (equation \ref{weight_z_prior}). This MAP estimate will be our template for designing the geological identification process in our framework (Fig. \ref{graph_simple}, process 3).
 
@@ -268,13 +276,19 @@ To formulate our objective function, we apply a negative logarithm to the new po
 
 Although we have had positive results with using the above \textit{LogSumExp} function in the smallness regularizer (the exponential function being in the Gaussian distribution $\mathcal{N}$), there are benefits of using the following approximation. Gaussian distributions decay exponentially. If the units have distinguishable enough contrasts, it is reasonable to approximate the \textit{LogSumExp} function in equation \ref{full_smallness} by its locally dominant quadratic term. This means considering only the most probable rock unit for each cell given the current model $\mathbf{m}$. The other terms of the summation are deemed negligible. For example consider the 1D physical property distributions in Fig. \ref{GaussianMixture}. For the physical property distribution in Fig. \ref{GaussianMixture}(a), the individual Gaussian functions representing each rock unit can locally approximate the GMM extremely well. On the other hand, for the physical property distribution displayed in Fig. \ref{GaussianMixture}(b), there is too much overlap between the two individual Gaussian components. Individually they are not a good approximation to the full GMM distribution and the above assumption is incorrect. In that case, one can either work with the full expression shown in equation \ref{full_smallness}, or potentially re-evaluate whether the individual distributions are distinct enough to be considered as separate units. As a rule of thumb, contrasts are deemed distinguishable enough to apply this approximation if the centers of two clusters are separated by at least three times the largest standard deviation. By using the parameters of the most likely cluster at each active cell we can approximate $\Phi_{s}(\mathbf{m})$ as:
 
-\begin{align}
-&\Phi_{s}(\mathbf{m}) = \frac{1}{2}||W_{s}(\Theta, \mathbf{z}^*)(\mathbf{m}-\mathbf{m}_{\text{ref}}(\Theta, \mathbf{z}^*))||_2^2 \label{smallness_petro}\\
-&\text{with:}\nonumber\\
-&\mathbf{z^*} = \mathop{\hbox{argmax}}\limits_{\mathbf{z}}\mathcal{P}(\mathbf{m}|\mathbf{z})\mathcal{P}(\mathbf{z}) \label{membership} \\
-&\mathbf{m}_{\text{ref}}(\Theta, \mathbf{z}^*) = {\mu}_{\mathbf{z}^*} \label{mref_update}\\
+\begin{equation}
+&\Phi_{s}(\mathbf{m}) = \frac{1}{2}||W_{s}(\Theta, \mathbf{z}^*)(\mathbf{m}-\mathbf{m}_{\text{ref}}(\Theta, \mathbf{z}^*))||_2^2 \label{smallness_petro}
+\end{equation}
+with:
+\begin{equation}
+&\mathbf{z^*} = \mathop{\hbox{argmax}}\limits_{\mathbf{z}}\mathcal{P}(\mathbf{m}|\mathbf{z})\mathcal{P}(\mathbf{z}) \label{membership}
+\end{equation}
+\begin{equation}
+&\mathbf{m}_{\text{ref}}(\Theta, \mathbf{z}^*) = {\mu}_{\mathbf{z}^*} \label{mref_update}
+\end{equation}
+\begin{equation}
 &W_{s}(\Theta, \mathbf{z}^*) = \text{diag}({\mathbf{w}}\circ{\sigma_{\mathbf{z}^*}^{-1}}) \label{Ws_update}
-\end{align}
+\end{equation}
 
 Note the similarity of the smallness term in equation \ref{smallness_petro} with the Tikhonov formulation (equation \ref{smallness_l2}). This allows us to generate a petrophysically and geologically guided inversion that uses traditional algorithms, and thus can rely on the research literature on the Tikhonov approach.
 
@@ -323,10 +337,15 @@ The global proportion weights follow a categorical distribution whose conjugate 
 At iteration $(k)$, the resulting posterior estimate of $\left\{\pi_j\right\}_{j=1..c}$, given $\left\{{\pi_j}_{prior}\right\}_{j=1..c}$ and with confidence $\left\{\zeta_j\right\}_{j=1..c}$, is shown in equation \ref{pi_update}:
 
 \begin{align}
-&\pi^{(k)}_j = \frac{V_{j}^{(k)}+\zeta_j {\pi_j}_{prior}V}{V(1+\sum_{t=1}^c \zeta_t {\pi_t}_{prior})} \label{pi_update}\\
-&\text{with:} \nonumber\\
-&V_{j}^{(k)} = \sum^n_{i=1} v_i n_{ij}^{(k)} \label{VolumeProportions}\\
-&\text{ and } V=\sum^n_{i=1} v_i
+&\pi^{(k)}_j = \frac{V_{j}^{(k)}+\zeta_j {\pi_j}_{prior}V}{V(1+\sum_{t=1}^c \zeta_t {\pi_t}_{prior})} \label{pi_update}
+\end{align}
+with:
+\begin{align}
+&V_{j}^{(k)} = \sum^n_{i=1} v_i n_{ij}^{(k)} \label{VolumeProportions}
+\end{align}
+and
+\begin{align}
+V=\sum^n_{i=1} v_i
 \end{align}
 
 where $v_i$ is the volume of the $i^\text{th}$ cell and $V$ is the volume of the active mesh. The addition of these volume weights is necessary because the cells of our mesh can have different sizes. We want to use a prior information that is mesh-independent. That is why we use volumetric proportions instead of cell counts, which is the way the EM algorithm is usually implemented.
@@ -337,7 +356,9 @@ To avoid this issue, a semi-conjugate prior approach is possible where the depen
 
 \begin{align}
 &\mathcal{P}({\mu}| \sigma^2) = \mathcal{N}({\mu}|{\mu}_{prior}, ({\kappa}\pi_{prior}V)^{-1}) \label{mu_semiprior} \\
-&\text{and:}\nonumber \\
+\end{align}
+and:
+\begin{align}
 &\mathcal{P}(\sigma^2|{\mu}) = \mathcal{X}^{-2}(\sigma^2|{\nu}{\pi}_{prior}V,\sigma_{prior}^2) \label{sigma_semiprior}
 \end{align}
 
@@ -346,8 +367,10 @@ Note that if we put prior information only on the means, or only on the variance
 The update of the means is the same for both the full conjugate and semi-conjugate prior approaches. The current $(k)$ posterior estimate of the means $\left\{{\mu}_j\right\}_{j=1..c}$ is a weighted average of the MLE estimates $\left\{\bar{\mathbf{m}}_j\right\}_{j=1..c}$ from equation \ref{MLE-means}, using the geophysical model as the samples, with the prior means $\left\{{{\mu}_j}_{prior}\right\}_{j=1..c}$ and with confidences $\left\{\kappa_j\right\}_{j=1..c}$. This update to the means is shown in equation \ref{mu_update}:
 
 \begin{align}
-&{\mu}^{(k)}_j=\frac{V_{j}^{(k)}{\bar{{m}}}_j^{(k)} + \kappa_j {\pi_j}_{prior} V {{\mu}_j}_{prior}}{V_{j}^{(k)}+\kappa_j {\pi_j}_{prior} V} \label{mu_update}\\
-&\text{with:} \nonumber\\
+&{\mu}^{(k)}_j=\frac{V_{j}^{(k)}{\bar{{m}}}_j^{(k)} + \kappa_j {\pi_j}_{prior} V {{\mu}_j}_{prior}}{V_{j}^{(k)}+\kappa_j {\pi_j}_{prior} V} \label{mu_update}
+\end{align}
+with:
+\begin{align}
 &{\bar{{m}}}_j^{(k)} = \frac{\sum^n_{i=1} v_i n_{ij}^{(k)} {m}_i}{V_{j}^{(k)}}
 \end{align}
 
@@ -356,8 +379,10 @@ For the semi-conjugate prior, the current $(k)$ posterior estimate of the varian
 
 \begin{align}
 &{\sigma_j^2}^{(k)} = \frac{{{V_{j}^{(k)}} {\sigma^2_{\bar{\mathbf{m}}}}_j}^{(k)} + \nu_j {\pi_j}_{prior} V {\sigma_j^2}_{prior}}
-{{V_{j}^{(k)}} + \nu_j {\pi_j}_{prior} V} \label{sig_update}\\
-&\text{with:} \nonumber\\
+{{V_{j}^{(k)}} + \nu_j {\pi_j}_{prior} V} \label{sig_update}
+\end{align}
+with:
+\begin{align}
 &{\sigma^2_{\bar{\mathbf{m}}}}_j^{(k)} =\frac{1}{{V_{j}^{(k)}}} \sum_{i=1}^{n} v_i n_{ij}^{(k)}({m}_i-\bar{{m}_j}^{(k)})^2
 \end{align}
 
@@ -384,10 +409,16 @@ The smallness term, such as defined in equation \ref{smallness_petro}, measures 
 For the definition and evaluation of the petrophysical target misfit, we  focus on the petrophysical and geological information contained in the smallness term that is summarized in equations \ref{smallness_petro_2} to \ref{Ws_update_2} and identified as $\Phi_{petro}$.
 
 \begin{align}
-&\Phi_{petro}(\mathbf{m}) = \frac{1}{2}||W_{s}(\Theta, \mathbf{z}^*)(\mathbf{m}-\mathbf{m}_{\text{ref}}(\Theta, \mathbf{z}^*))||_2^2 \label{smallness_petro_2}\\
-&\text{with:}\nonumber\\
+&\Phi_{petro}(\mathbf{m}) = \frac{1}{2}||W_{s}(\Theta, \mathbf{z}^*)(\mathbf{m}-\mathbf{m}_{\text{ref}}(\Theta, \mathbf{z}^*))||_2^2 \label{smallness_petro_2}
+\end{align}
+with:
+\begin{align}
 &\mathbf{z^*} = \mathop{\hbox{argmax}}\limits_{\mathbf{z}}\mathcal{P}(\mathbf{m}|\mathbf{z})\mathcal{P}(\mathbf{z}) \label{membership_2} \\
-&\mathbf{m}_{\text{ref}}(\Theta, \mathbf{z}^*) = {\mu}_{\mathbf{z}^*} \label{mref_update_2}\\
+\end{align}
+\begin{align}
+&\mathbf{m}_{\text{ref}}(\Theta, \mathbf{z}^*) = {\mu}_{\mathbf{z}^*} \label{mref_update_2}
+\end{align}
+\begin{align}
 &W_{s}(\Theta, \mathbf{z}^*) = \text{diag}({\sigma_{\mathbf{z}^*}^{-1}}) \label{Ws_update_2}
 \end{align}
 

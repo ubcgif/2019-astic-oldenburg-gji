@@ -18,4 +18,4 @@
 format: jb-book
 root: Astic_Oldenburg_PGI_article_revised_v2.tex
 chapters:
-  - file: Appendix.tex
+  - file: appendix.tex

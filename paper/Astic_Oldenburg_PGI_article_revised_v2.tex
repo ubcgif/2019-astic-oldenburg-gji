@@ -753,50 +753,50 @@ We thank Tim Munday (CSIRO) for making the Bookpurnong datasets available. We al
 % \appendix
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\appendix{From A Posterior with Gaussian Distributions to an least-squares Objective-Function} \label{appendix:PDtoL2}
+% \appendix{From A Posterior with Gaussian Distributions to an least-squares Objective-Function} \label{appendix:PDtoL2}
 
-In this appendix, we develop the operations necessary to go from a posterior distribution formulation to an objective function in the case of the Tikhonov inverse problem.
+% In this appendix, we develop the operations necessary to go from a posterior distribution formulation to an objective function in the case of the Tikhonov inverse problem.
 
-We stated in section \ref{section:keys} that a least-squares term corresponds to a Gaussian prior. For a vector of parameters, the multivariate Gaussian distribution, denoted by $\mathcal{N}$, with mean $\mathbf{\mu}$ and covariance $\Sigma$ (denoted by $\sigma^2$ for a unidimensional Gaussian, with $\sigma$ being the standard-deviation) is:
+% We stated in section \ref{section:keys} that a least-squares term corresponds to a Gaussian prior. For a vector of parameters, the multivariate Gaussian distribution, denoted by $\mathcal{N}$, with mean $\mathbf{\mu}$ and covariance $\Sigma$ (denoted by $\sigma^2$ for a unidimensional Gaussian, with $\sigma$ being the standard-deviation) is:
 
-\begin{align}
-&\mathcal{N}(\mathbf{m}|\mathbf{\mu}, \Sigma) = {\frac{\exp(-\frac{1}{2}||\Sigma^{-\frac{1}{2}}(\mathbf{m}-\mathbf{\mu})||_2^2)}{\sqrt{(2\pi)^n\det(\Sigma)}}} \label{GaussianDef_2}
-\end{align}
+% \begin{align}
+% &\mathcal{N}(\mathbf{m}|\mathbf{\mu}, \Sigma) = {\frac{\exp(-\frac{1}{2}||\Sigma^{-\frac{1}{2}}(\mathbf{m}-\mathbf{\mu})||_2^2)}{\sqrt{(2\pi)^n\det(\Sigma)}}} \label{GaussianDef_2}
+% \end{align}
 
-Going from a posterior distribution to an objective function is done by taking the negative natural logarithm of the posterior. Taking the negative logarithm of a single Gaussian term gives:
+% Going from a posterior distribution to an objective function is done by taking the negative natural logarithm of the posterior. Taking the negative logarithm of a single Gaussian term gives:
 
-\begin{align}
-&-\log(\mathcal{N}(\mathbf{m}|\mathbf{\mu}, \Sigma)) = \frac{1}{2}||\Sigma^{-\frac{1}{2}}(\mathbf{m}-\mathbf{\mu})||_2^2 + \log({\sqrt{(2\pi)^n\det(\Sigma)}}) \label{LogGaussian}
-\end{align}
+% \begin{align}
+% &-\log(\mathcal{N}(\mathbf{m}|\mathbf{\mu}, \Sigma)) = \frac{1}{2}||\Sigma^{-\frac{1}{2}}(\mathbf{m}-\mathbf{\mu})||_2^2 + \log({\sqrt{(2\pi)^n\det(\Sigma)}}) \label{LogGaussian}
+% \end{align}
 
-The first term obtained in equation \ref{LogGaussian} is recognizable as a least-squares misfit. The second term does not depend on $\mathbf{m}$ and is thus a constant. As constants do not play any role in the optimization, it is thus discarded in the objective function.
+% The first term obtained in equation \ref{LogGaussian} is recognizable as a least-squares misfit. The second term does not depend on $\mathbf{m}$ and is thus a constant. As constants do not play any role in the optimization, it is thus discarded in the objective function.
 
-For the full Tikhonov geophysical objective function $\mathcal{P}(\mathbf{m}|\mathbf{d}_{\text{obs}})$, the full posterior distributions can be written, using the Bayes rules, as:
+% For the full Tikhonov geophysical objective function $\mathcal{P}(\mathbf{m}|\mathbf{d}_{\text{obs}})$, the full posterior distributions can be written, using the Bayes rules, as:
 
-\begin{align}
-&\mathcal{P}(\mathbf{m}|\mathbf{d}_{\text{obs}}) = \frac{\mathcal{P}(\mathbf{d}_{\text{obs}}|\mathbf{m})\mathcal{P}(\mathbf{m})}{\mathcal{P}(\mathbf{d}_{\text{obs}})} \label{appendix:Bayes}\\
-&\text{with: }\nonumber\\
-&\mathcal{P}(\mathbf{d}_{\text{obs}}|\mathbf{m}) = \mathcal{N}(\mathcal{F}\lbrack\mathbf{m}\rbrack|\mathbf{d}_{\text{obs}}, (W_d^TW_d)^{-1}) \\
-&\mathcal{P}(\mathbf{m}) = \mathcal{N}(\mathbf{m}|\mathbf{m}_{{\text{ref}}}, (\beta\alpha_sW_s^TW_s)^{-1})\mathcal{N}(\mathbf{m}|\mathbf{m}_{{\text{ref}}},(\beta L^TL)^{-1})
-\end{align}
+% \begin{align}
+% &\mathcal{P}(\mathbf{m}|\mathbf{d}_{\text{obs}}) = \frac{\mathcal{P}(\mathbf{d}_{\text{obs}}|\mathbf{m})\mathcal{P}(\mathbf{m})}{\mathcal{P}(\mathbf{d}_{\text{obs}})} \label{appendix:Bayes}\\
+% &\text{with: }\nonumber\\
+% &\mathcal{P}(\mathbf{d}_{\text{obs}}|\mathbf{m}) = \mathcal{N}(\mathcal{F}\lbrack\mathbf{m}\rbrack|\mathbf{d}_{\text{obs}}, (W_d^TW_d)^{-1}) \\
+% &\mathcal{P}(\mathbf{m}) = \mathcal{N}(\mathbf{m}|\mathbf{m}_{{\text{ref}}}, (\beta\alpha_sW_s^TW_s)^{-1})\mathcal{N}(\mathbf{m}|\mathbf{m}_{{\text{ref}}},(\beta L^TL)^{-1})
+% \end{align}
 
-where the finite difference operator $L$ summarizes the first or second derivatives in all directions with their respective $\{\alpha\}$ scale. We respectively express the data misfit, the smallness and smoothness probability functions as Gaussian distributions:
+% where the finite difference operator $L$ summarizes the first or second derivatives in all directions with their respective $\{\alpha\}$ scale. We respectively express the data misfit, the smallness and smoothness probability functions as Gaussian distributions:
 
-\begin{align}
-&\mathcal{N}(\mathbf{d}_{\text{obs}}|\mathbf{m}, (W_d^TW_d)^{-1}) = {\frac{\exp(-\frac{1}{2}||W_d(\mathcal{F}\lbrack\mathbf{m}\rbrack-\mathbf{d}_{\text{obs}})||_2^2)}{\sqrt{(2\pi)^n\det(\lbrack W_d^TW_d\rbrack^{-1})}}} \label{DataMisfitGaussian}\\
-&\mathcal{N}(\mathbf{m}|\mathbf{m}_{{\text{ref}}}, (\beta\alpha_sW_s^TW_s)^{-1}) = {\frac{\exp(-\frac{1}{2}||W_s(\mathbf{m}-\mathbf{m}_{{\text{ref}}})||_2^2)^{\beta\alpha_s}}{\sqrt{(2\pi)^n\det(\lbrack \beta\alpha_sW_s^TW_s\rbrack^{-1})}}} \label{SmallnessGaussian}\\
-&\mathcal{N}(\mathbf{m}|\mathbf{m}_{{\text{ref}}}, (\beta L^TL)^{-1}) = {\frac{\exp(-\frac{1}{2}||L_i(\mathbf{m}-\mathbf{m}_{{\text{ref}}})||_2^2)^{\beta}}{\sqrt{(2\pi)^n\det(\lbrack \beta L^TL\rbrack^{-1})}}} \label{SmoothnessGaussian}
-\end{align}
+% \begin{align}
+% &\mathcal{N}(\mathbf{d}_{\text{obs}}|\mathbf{m}, (W_d^TW_d)^{-1}) = {\frac{\exp(-\frac{1}{2}||W_d(\mathcal{F}\lbrack\mathbf{m}\rbrack-\mathbf{d}_{\text{obs}})||_2^2)}{\sqrt{(2\pi)^n\det(\lbrack W_d^TW_d\rbrack^{-1})}}} \label{DataMisfitGaussian}\\
+% &\mathcal{N}(\mathbf{m}|\mathbf{m}_{{\text{ref}}}, (\beta\alpha_sW_s^TW_s)^{-1}) = {\frac{\exp(-\frac{1}{2}||W_s(\mathbf{m}-\mathbf{m}_{{\text{ref}}})||_2^2)^{\beta\alpha_s}}{\sqrt{(2\pi)^n\det(\lbrack \beta\alpha_sW_s^TW_s\rbrack^{-1})}}} \label{SmallnessGaussian}\\
+% &\mathcal{N}(\mathbf{m}|\mathbf{m}_{{\text{ref}}}, (\beta L^TL)^{-1}) = {\frac{\exp(-\frac{1}{2}||L_i(\mathbf{m}-\mathbf{m}_{{\text{ref}}})||_2^2)^{\beta}}{\sqrt{(2\pi)^n\det(\lbrack \beta L^TL\rbrack^{-1})}}} \label{SmoothnessGaussian}
+% \end{align}
 
-The objective function is obtained by applying the negative natural logarithm to the posterior distribution described in equation \ref{appendix:Bayes}. The summation form is simply a consequence of the fundamental property of the logarithm function, the multiplication becomes an addition in this new space. It follows:
+% The objective function is obtained by applying the negative natural logarithm to the posterior distribution described in equation \ref{appendix:Bayes}. The summation form is simply a consequence of the fundamental property of the logarithm function, the multiplication becomes an addition in this new space. It follows:
 
-\begin{align}
-\Phi(\mathbf{m}) &= \frac{1}{2}||W_d(\mathcal{F}\lbrack\mathbf{m}\rbrack-\mathbf{d}_{\text{obs}})||_2^2 + \frac{\beta\alpha_s}{2}||W_s(\mathbf{m}-\mathbf{m}_{{\text{ref}}})||_2^2 + \nonumber\\  &~\frac{\beta}{2}||L(\mathbf{m}-\mathbf{m}_{{\text{ref}}})||_2^2 +\text{Constant} \label{fullObjFct}
-\end{align}
+% \begin{align}
+% \Phi(\mathbf{m}) &= \frac{1}{2}||W_d(\mathcal{F}\lbrack\mathbf{m}\rbrack-\mathbf{d}_{\text{obs}})||_2^2 + \frac{\beta\alpha_s}{2}||W_s(\mathbf{m}-\mathbf{m}_{{\text{ref}}})||_2^2 + \nonumber\\  &~\frac{\beta}{2}||L(\mathbf{m}-\mathbf{m}_{{\text{ref}}})||_2^2 +\text{Constant} \label{fullObjFct}
+% \end{align}
 
-The constant term in equation \ref{fullObjFct} contains the constant terms for each Gaussian distribution and the constant term $log(\mathcal{P}(\mathbf{d}_{\text{obs}}))$.
+% The constant term in equation \ref{fullObjFct} contains the constant terms for each Gaussian distribution and the constant term $log(\mathcal{P}(\mathbf{d}_{\text{obs}}))$.
 
-This completes the detailed operation to go from a posterior distribution to an objective function formulation of the Tikhonov inverse problem.
+% This completes the detailed operation to go from a posterior distribution to an objective function formulation of the Tikhonov inverse problem.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

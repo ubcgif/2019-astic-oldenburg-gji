@@ -512,7 +512,7 @@ In this example, we demonstrate how to use the PGI framework to include petrophy
  \centering
  \includegraphics[width=\columnwidth]{./Fig/LowRes/MT1D_Setup.png}
  \caption[]{Setup of the MT1D example: (a) True geophysical model $\mathbf{m}_{\text{true}}$. The dots coincide with the cell centers in the discretized model. (b) True model weighted histogram and prior petrophysical distribution $\Theta_{\text{prior}}$; (c) MT data and uncertainties.}
- \label{fig:MT1D_Setup}
+ \label{Fig/LowRes/MT1D_Setup}
 \end{figure}
 
 \subsubsection{Setup}
@@ -550,7 +550,7 @@ In addition to being closer to the ground truth, our inversion procedure converg
 
 \begin{figure*}
 \centering
-\includegraphics[width=0.95\textwidth]{MT1D_Iterations.png}
+\includegraphics[width=0.95\textwidth]{Fig/LowRes/MT1D_Iterations.png}
 \caption[]{Iterations of the PGI MT1D example}
 \label{fig:MT1D_Iterations}
 \end{figure*}
@@ -564,7 +564,7 @@ In this example we illustrate the performance of our framework when no physical 
 
 \begin{figure*}
 \centering
-\includegraphics[width=\textwidth]{DC2p5D_Setup.png}
+\includegraphics[width=\textwidth]{Fig/LowRes/DC2p5D_Setup.png}
 \caption[]{Setup of the DC resistivity example. (a): True conductivity. (b): True petrophysical distribution. (c): DC data to be inverted. (d): Histogram of the measured apparent resistivity. The best fitting half-space ($112~\Omega \text{m}$) is indicated by the vertical dashed line. (e): Sensitivity weights $\mathbf{w}$ used for all inversions.}
 \label{fig:DC2p5D_Setup}
 \end{figure*}
@@ -584,7 +584,7 @@ To set benchmarks for the inversion results, we first carry out a Tikhonov inver
 
 \begin{figure*}
 \centering
-\includegraphics[width=\textwidth]{DC2p5D_Result.png}
+\includegraphics[width=\textwidth]{Fig/LowRes/DC2p5D_Result.png}
 \caption{DC inversion results. The color scale is the same as for the true model in Fig. \ref{fig:DC2p5D_Setup}(a). Figs (a), (b) and (c) present the recovered model, histogram and convergence curves respectively for the Tikhonov approach. Figs (d), (e) and (f) show the same plots for PGI, when the true petrophysical distribution was provided. Figs (g), (h) and (i) show the results for PGI, when no information on the proportions or the physical property means of the units were provided. Figs (j), (k) and (l) show how PGI, with no mean information, can be improved by adding information about the  depth and thickness of the cylinders.}
 \label{fig:DC2p5D_Result}
 \end{figure*}
@@ -639,7 +639,7 @@ We illustrate this on a field frequency-domain EM dataset \citep{WardandHohmann}
 
 \begin{figure*}
     \centering
-    \includegraphics[width=\textwidth]{Booky_setup.png}
+    \includegraphics[width=\textwidth]{Fig/LowRes/Booky_setup.png}
     \caption[]{Bookpurnong survey area. The elevation of the survey area is represented as an overlaid colormap. The white arrows represent the water flow, both of the river and from the irrigation zone. Geographic system: WGS 84 / UTM 54S. Aerial images from Google Earth, \textcopyright2019 DigitalGlobe.}
     \label{fig:Book_Setup}
 \end{figure*}
@@ -660,7 +660,7 @@ For each Tikhonov and PGI approach, we run two separate inversions using $0.01~\
 
 \begin{figure*}
 \centering
-\includegraphics[width=\textwidth]{Booky_L2_Results.png}
+\includegraphics[width=\textwidth]{Fig/LowRes/Booky_L2_Results.png}
 \caption{Tikhonov results with two different reference models. All figures share the same color scale for conductivity. Figs (a), (b) and (c) show the results starting from a conductive half-space. Figs (d), (e) and (f) show the result starting from a resistive half-space. Figs (a) and (d) display the recovered geophysical models on a plan view at a depth of $8.5$ m. Figs (b) and (e) display a cross-section of the recovered geophysical models. Depth of investigation (DOI) evaluated using the method presented in \cite{DOI}. Figs (c) and (f) display the histogram of the recovered model for each inversion.}
 \label{fig:Book_L2_Results}
 \end{figure*}

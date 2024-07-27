@@ -1,43 +1,46 @@
 # See docs at: https://mystmd.org/guide/frontmatter
 version: 1
 project:
-  # id: ubcgif-YEAR-AUTHORS-JOURNAL
-  # title: TITLE OF PAPER
-  # description: SHORT DESCRIPTION HERE
+  id: ubcgif-2019-astic-oldenburg-gji
+  title: A framework for petrophysically and geologically guided geophysical inversion using a dynamic Gaussian mixture model prior 
+  description: Applying our framework to inverting airborne frequency domain data, acquired in Australia, for the detection and characterization of saline contamination of freshwater.
   authors:
-    # - name: AUTHOR 1
-    #   email: EMAIL
-    #   corresponding: true
-    #   orcid: ORCID
-    #   affiliation:
-    #     id: ubc
-    #     name: Department of Earth, Ocean and Atmospheric Sciences, University of British Columbia, Vancouver, British Columbia
-    # - name: Lindsey J. Heagy
-    #   email: lheagy@eoas.ubc.ca
-    #   corresponding: true
-    #   orcid: 0000-0002-1551-5926
-    #   affiliation: ubc
-  # doi: DOI
+    - name: Thibaut Astic
+      email: tastic@eoas.ubc.ca
+      corresponding: true
+      orcid: 0000-0003-1237-6315
+      affiliation:
+        id: ubc
+        name: Department of Earth, Ocean and Atmospheric Sciences, University of British Columbia, Vancouver, British Columbia
+    - name: Douglas W Oldenburg
+      email: doug@eos.ubc.ca
+      orcid: 0000-0002-4327-2124
+      affiliation: ubc
+  doi: 10.1093/gji/ggz389
   # arxiv: ARXIV
-  # github: GITHUB-URL
-  # date: YYYY/MM/DD # date of publication
+  github: https://github.com/simpeg-research/Astic-2019-PGI 
+  date: 2019/08/30 # date of publication
   # license: CC-BY-4.0  # uncomment this and the line below if open access
   # open_access: true
   venue:
-    # title: JOURNAL NAME
-    # url: JOURNAL URL
+    title: Geophysical Journal International
+    url: https://academic.oup.com/gji/article/219/3/1989/5556947
   history:
-    # received: YYYY/MM/DD
-    # accepted: YYYY/MM/DD
-    # published: YYYY/MM/DD
+    received: 2019/08/14
+    accepted: 2019/08/24
+    published: 2019/08/30
   keywords:
-    # - KEYWORD 1
-    # - KEYWORD 2
-    # - KEYWORD 3
-    # - KEYWORD 4
+    - Electrical properties 
+    - Non-linear electromagnetics
+    - Inverse theory
+    - Joint Inversion
+    - Probability distributions
   abbreviations:
-    # CSEM: controlled source electromagnetics
-    # EM: electromagnetics
+    GMM: Gaussian mixture model 
+    MAP: maximum a posteriori
+    DC: Direct Current
+    FDEM: frequency domain electromagnetics 
+    EM: electromagnetics
   thumbnail: thumbnail.png
   numbering:
     headings: true
@@ -45,5 +48,5 @@ site:
   template: article-theme
   actions:
     - title: pdf
-      # url: NAME-OF-PDF.pdf
+      url: 2019-astic-oldenburg-gji.pdf
       static: true
